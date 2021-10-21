@@ -1,0 +1,73 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center mt-5">
+            <div class="col-12 col-lg-6 col-md-6">
+                <h1 class="display-4 text-center">
+                    {{ title }}
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center mt-5">
+            <div class="col-8">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center mt-5">
+            <div class="col-12 col-lg-6 col-md-6">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <th scope="row">{{ category.id }}</th>
+                            <td>{{ category.title }}</td>
+                            <td>{{ category.description }}</td>
+                            <td>
+                                <button onclick="location.href='{{ path('admin_category_update', {'id': category.id}) }}'" type="button"
+                                        class="btn btn-secondary">
+                                    Update
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center mt-5">
+            <div class="col-12 col-lg-6 col-md-6">
+                <a href="{{ path('admin_category_create') }}" class="display-4 text-center btn btn-success">Create category</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
